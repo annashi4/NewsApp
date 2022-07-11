@@ -1,18 +1,22 @@
-//
-//  ViewController.swift
-//  NewsApp
-//
-//  Created by Anna on 11.07.2022.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private let newsTableView: UITableView = {
+        let table = UITableView()
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return table
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemBackground
+        
+        view.addSubview(newsTableView)
+        newsTableView.delegate = self
+        newsTableView.dataSource = self
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "News"
         

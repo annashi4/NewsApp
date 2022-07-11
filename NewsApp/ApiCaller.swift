@@ -4,7 +4,7 @@ final class APICaller{
     static let shared = APICaller()
     
     struct Constants {
-        static let url = URL(string: "https://newsapi.org/v2/top-headlines?contry=Russia&apiKey=d22e6b56f2114aff8efc956f789130e5")
+        static let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=d22e6b56f2114aff8efc956f789130e5")
     }
     
     private init() {}
@@ -35,9 +35,9 @@ struct AIPResponse: Codable {
 }
 
 struct Article: Codable {
-    let source: Source
+   let source: Source
     let title: String
-    let description: String
+   let description: String?
     let url: String
     let urlToImage: String
     let publishedAt: String
