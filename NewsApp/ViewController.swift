@@ -29,5 +29,9 @@ class ViewController: UIViewController {
             }
         }
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        newsTableView.frame = view.bounds
+    }
 }
 
