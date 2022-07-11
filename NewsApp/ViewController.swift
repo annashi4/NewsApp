@@ -11,9 +11,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .systemGreen
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "News"
+        
+        APICaller.shared.getNews { result in
+            switch result {
+            case .success(let response):
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
-
-
 }
 
