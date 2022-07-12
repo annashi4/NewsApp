@@ -19,13 +19,15 @@ class NewsTableViewCell: UITableViewCell {
     
     private let newsTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.numberOfLines = 2
         return label
     }()
     
     private let newsSubtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 14)
+        label.numberOfLines = 6
         return label
     }()
     
@@ -49,6 +51,15 @@ class NewsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        newsTitleLabel.frame = CGRect(x: 10, y: 0,
+                                      width: contentView.frame.size.width - 90,
+                                      height: contentView.frame.size.height/2)
+        newsSubtitleLabel.frame = CGRect(x: 10, y: contentView.frame.size.height/2,
+                                      width: contentView.frame.size.width - 20,
+                                         height: contentView.frame.size.height / 3)
+        newsImageView.frame = CGRect(x: contentView.frame.size.width - 80, y:10,
+                                      width: 75,
+                                      height: 75)
     }
     
     override func prepareForReuse() {
