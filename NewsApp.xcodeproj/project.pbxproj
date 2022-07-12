@@ -15,6 +15,7 @@
 		95E886EC287BF377001B0A91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E886EA287BF377001B0A91 /* LaunchScreen.storyboard */; };
 		95E886F4287BF856001B0A91 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E886F3287BF856001B0A91 /* ApiCaller.swift */; };
 		95E886F6287C88CD001B0A91 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E886F5287C88CD001B0A91 /* Extensions.swift */; };
+		95E886F8287C9452001B0A91 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E886F7287C9452001B0A91 /* NewsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		95E886ED287BF377001B0A91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95E886F3287BF856001B0A91 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
 		95E886F5287C88CD001B0A91 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		95E886F7287C9452001B0A91 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				95E886DF287BF374001B0A91 /* AppDelegate.swift */,
 				95E886E1287BF374001B0A91 /* SceneDelegate.swift */,
 				95E886E3287BF374001B0A91 /* ViewController.swift */,
+				95E886F7287C9452001B0A91 /* NewsTableViewCell.swift */,
 				95E886F5287C88CD001B0A91 /* Extensions.swift */,
 				95E886F3287BF856001B0A91 /* ApiCaller.swift */,
 				95E886E5287BF374001B0A91 /* Main.storyboard */,
@@ -146,6 +149,7 @@
 			files = (
 				95E886F6287C88CD001B0A91 /* Extensions.swift in Sources */,
 				95E886E4287BF374001B0A91 /* ViewController.swift in Sources */,
+				95E886F8287C9452001B0A91 /* NewsTableViewCell.swift in Sources */,
 				95E886E0287BF374001B0A91 /* AppDelegate.swift in Sources */,
 				95E886E2287BF374001B0A91 /* SceneDelegate.swift in Sources */,
 				95E886F4287BF856001B0A91 /* ApiCaller.swift in Sources */,
