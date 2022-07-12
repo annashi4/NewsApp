@@ -2,36 +2,49 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let newsTableView: UITableView = {
+     let newsTableView: UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         return table
     }()
-
+    
+    var viewModels = [NewsTableViewCellViewModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
-        view.addSubview(newsTableView)
+        
         newsTableView.delegate = self
         newsTableView.dataSource = self
+        
+        view.addSubview(newsTableView)
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "News"
         
-        APICaller.shared.getNews { result in
+        APICaller.shared.getNews { [ weak self ] result in
             switch result {
-            case .success(let response):
-                break
+            case .success(let articles):
+                self?.viewModels = articles.compactMap({
+                    NewsTableViewCellViewModel(title: $0.title,
+                                               subtitle: $0.description ?? "",
+                                               imageURL: URL (string: $0.urlToImage ?? "")
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.newsTableView.reloadData()
+                }
+                
             case .failure(let error):
                 print(error)
             }
         }
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         newsTableView.frame = view.bounds
     }
 }
-

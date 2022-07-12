@@ -9,7 +9,7 @@ final class APICaller{
     
     private init() {}
     
-    public func getNews(complition: @escaping(Result<[String], Error>) -> Void) {
+    public func getNews(complition: @escaping(Result<[Article], Error>) -> Void) {
         guard let url = Constants.url else { return }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -17,6 +17,7 @@ final class APICaller{
             } else if let data = data {
                 do{
                     let result = try JSONDecoder().decode(AIPResponse.self, from: data)
+                    complition(.success(result.articles))
                     
                     print("Articles: \(result.articles.count)")
                 } catch {
