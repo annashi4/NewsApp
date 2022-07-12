@@ -20,14 +20,14 @@ class NewsTableViewCell: UITableViewCell {
     private let newsTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         return label
     }()
     
     private let newsSubtitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
-        label.numberOfLines = 6
+        label.numberOfLines = 0
         return label
     }()
     
@@ -52,12 +52,12 @@ class NewsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         newsTitleLabel.frame = CGRect(x: 10, y: 0,
-                                      width: contentView.frame.size.width - 90,
+                                      width: contentView.frame.size.width - 95,
                                       height: contentView.frame.size.height/2)
         newsSubtitleLabel.frame = CGRect(x: 10, y: contentView.frame.size.height/2,
                                       width: contentView.frame.size.width - 20,
-                                         height: contentView.frame.size.height / 3)
-        newsImageView.frame = CGRect(x: contentView.frame.size.width - 80, y:10,
+                                         height: contentView.frame.size.height / 2 + 10)
+        newsImageView.frame = CGRect(x: contentView.frame.size.width - 80, y: 15,
                                       width: 75,
                                       height: 75)
     }
@@ -72,8 +72,14 @@ class NewsTableViewCell: UITableViewCell {
         
         if let data = viewModel.imageData {
             newsImageView.image = UIImage(data: data)
-        } else {
-            
+        } else if let url = viewModel.imageURL {
+            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                guard let data = data, error == nil else { return }
+                viewModel.imageData = data
+                DispatchQueue.main.async {
+                    self?.newsImageView.image = UIImage(data: data)
+                }
+            }.resume()
         }
     }
     
