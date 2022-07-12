@@ -17,8 +17,30 @@ class NewsTableViewCell: UITableViewCell {
 
     static let identifier = "NewsTableViewCell"
     
+    private let newsTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 20)
+        return label
+    }()
+    
+    private let newsSubtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16)
+        return label
+    }()
+    
+    private let newsImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .systemGray
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(newsTitleLabel)
+        contentView.addSubview(newsSubtitleLabel)
+        contentView.addSubview(newsImageView)
     }
     
     required init?(coder: NSCoder) {
