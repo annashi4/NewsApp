@@ -4,7 +4,7 @@ final class APICaller{
     static let shared = APICaller()
     
     struct Constants {
-        static let url = URL(string: "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=d22e6b56f2114aff8efc956f789130e5")
+        static let url = URL(string: "https://newsapi.org/v2/everything?q=Apple&from=2022-07-13&sortBy=popularity&en&apiKey=d22e6b56f2114aff8efc956f789130e5")
     }
     
     private init() {}
@@ -26,6 +26,31 @@ final class APICaller{
             }
         }
         task.resume()
+    }
+}
+
+//MARK: fetching the news
+
+extension ViewController {
+    func fetchingNews(){
+        APICaller.shared.getNews { [ weak self ] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                self?.viewModels = articles.compactMap({
+                    NewsTableViewCellViewModel(title: $0.title,
+                                               subtitle: $0.description ?? "",
+                                               imageURL: URL (string: $0.urlToImage ?? "")
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.newsTableView.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

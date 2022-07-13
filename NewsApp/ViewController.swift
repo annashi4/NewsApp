@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-     let newsTableView: UITableView = {
+    let newsTableView: UITableView = {
         let table = UITableView()
         table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         return table
@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        
         newsTableView.delegate = self
         newsTableView.dataSource = self
         
@@ -25,24 +24,7 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "News"
         
-        APICaller.shared.getNews { [ weak self ] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                self?.viewModels = articles.compactMap({
-                    NewsTableViewCellViewModel(title: $0.title,
-                                               subtitle: $0.description ?? "",
-                                               imageURL: URL (string: $0.urlToImage ?? "")
-                    )
-                })
-                DispatchQueue.main.async {
-                    self?.newsTableView.reloadData()
-                }
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+        fetchingNews()
     }
     
     override func viewDidLayoutSubviews() {
