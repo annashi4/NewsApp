@@ -8,6 +8,7 @@ class ViewController: UIViewController {
         return table
     }()
     
+    var articles = [Article]()
     var viewModels = [NewsTableViewCellViewModel]()
     
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
         APICaller.shared.getNews { [ weak self ] result in
             switch result {
             case .success(let articles):
+                self?.articles = articles
                 self?.viewModels = articles.compactMap({
                     NewsTableViewCellViewModel(title: $0.title,
                                                subtitle: $0.description ?? "",

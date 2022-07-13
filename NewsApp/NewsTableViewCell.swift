@@ -33,7 +33,7 @@ class NewsTableViewCell: UITableViewCell {
     
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemGray
+        imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -51,19 +51,25 @@ class NewsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        newsTitleLabel.frame = CGRect(x: 10, y: 0,
-                                      width: contentView.frame.size.width - 95,
+        newsTitleLabel.frame = CGRect(x: 10,
+                                      y: 10,
+                                      width: contentView.frame.size.width - 125,
                                       height: contentView.frame.size.height/2)
-        newsSubtitleLabel.frame = CGRect(x: 10, y: contentView.frame.size.height/2,
-                                      width: contentView.frame.size.width - 20,
-                                         height: contentView.frame.size.height / 2 + 10)
-        newsImageView.frame = CGRect(x: contentView.frame.size.width - 80, y: 15,
-                                      width: 75,
-                                      height: 75)
+        newsSubtitleLabel.frame = CGRect(x: 10,
+                                         y: contentView.frame.size.height/2,
+                                         width: contentView.frame.size.width - 125,
+                                         height: contentView.frame.size.height / 2 )
+        newsImageView.frame = CGRect(x: contentView.frame.size.width - 110,
+                                     y: 20,
+                                     width: 100 ,
+                                     height:110)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        newsTitleLabel.text = nil
+        newsSubtitleLabel.text = nil
+        newsImageView.image = nil
     }
     
     func configure(with viewModel: NewsTableViewCellViewModel) {
